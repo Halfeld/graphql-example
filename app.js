@@ -9,4 +9,4 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }))
 
-const server = app.listen(3000, () => console.log('Server running'))
+const server = app.listen(3000, () => console.log('Server running!'))
