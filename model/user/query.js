@@ -1,15 +1,34 @@
-const { GraphQLNonNull } = require('graphql')
-const UserType = require('./type')
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLBoolean,
+  GraphQLInt
+} = require('graphql')
 
-module.exports = {
-  type: UserType,
-  args: {
-    _id: { type: new GraphQLNonNull(GraphQLID) }
-  },
-  resolve (root, args, context) {
-    console.log(root)
-    console.log(args)
-    console.log(context)
-    return { name: 'Igor', email: 'igor@devstacks.com.br' }
-  }
-}
+const User = require('./user')
+
+module.exports = new GraphQLObjectType({
+  name: 'RootQuery',
+  fields: () => ({
+    name: {
+      type: GraphQLString,
+      resolve: () => User.name
+    },
+    email: {
+      type: GraphQLString,
+      resolve: () => User.email
+    },
+    cellphone: {
+      type: GraphQLString,
+      resolve: () => User.cellphone
+    },
+    active: {
+      type: GraphQLBoolean,
+      resolve: () => User.active
+    },
+    years: {
+      type: GraphQLInt,
+      resolve: () => User.years
+    }
+  })
+})
